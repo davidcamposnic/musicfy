@@ -1,0 +1,1 @@
+export { NewArtistForm } from "./NewArtistForm";
