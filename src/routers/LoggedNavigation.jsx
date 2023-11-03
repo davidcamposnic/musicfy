@@ -9,9 +9,9 @@ const LoggedNavigation = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/artists" element={<Artists />} />
-          <Route path="/artist/:id" element={<Artist />} />
+          <Route path="/artists/:id" element={<Artist />} />
           <Route path="/albums" element={<Albums />} />
-          <Route path="/album/:id" element={<Album />} />
+          <Route path="/albums/:id" element={<Album />} />
           <Route path="/profile" element={<Profile />} />
         </Routes>
       </LoggedLayout>
