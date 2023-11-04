@@ -6,12 +6,12 @@ import { getFirestore } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDPccrlyCxwe_DxMZJYUregxchcmp8HD9A",
-  authDomain: "musicfy-v1-4d572.firebaseapp.com",
-  projectId: "musicfy-v1-4d572",
-  storageBucket: "musicfy-v1-4d572.appspot.com",
-  messagingSenderId: "591502233217",
-  appId: "1:591502233217:web:b3f2672c8d5e7069484780"
+  apiKey: "",
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: ""
 };
 
 // Initialize Firebase
