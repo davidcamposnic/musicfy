@@ -5,6 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 import { BasicModal } from "../../Shared";
 import { NewArtistForm } from "../../Artist";
 import { AddAlbumForm } from "../../Album";
+import { AddSongForm } from "../../Song";
 
 const LeftMenu = () => {
   const { pathname } = useLocation();
@@ -36,7 +37,7 @@ const LeftMenu = () => {
 
     if (type === "song") {
       setTitleModal("Nuevo canción");
-      setContentModal(<p>Formulario de nueva canción</p>);
+      setContentModal(<AddSongForm onClose={closeModal} />);
     }
 
     setShowModal(true);
