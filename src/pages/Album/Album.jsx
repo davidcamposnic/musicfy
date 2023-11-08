@@ -1,21 +1,35 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Album as AlbumController } from "../../api";
+import { Album as AlbumController, Song } from "../../api";
 import { Loader } from "semantic-ui-react";
 import { AlbumInfo } from "../../components/Album";
+import { ListSongs } from "../../components/Song";
 import "./Album.scss";
 
 const albumController = new AlbumController();
+const songController = new Song();
 
 const Album = () => {
   const { id } = useParams();
   const [album, setAlbum] = useState(null);
+  const [songs, setSongs] = useState(null);
 
   useEffect(() => {
     (async () => {
       try {
         const response = await albumController.getAlbum(id);
         setAlbum(response);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, [id]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await songController.obtainAllByAlbum(id);
+        setSongs(response);
       } catch (error) {
         console.log(error);
       }
@@ -32,6 +46,7 @@ const Album = () => {
   return (
     <div className="album-page">
       <AlbumInfo album={album} />
+      <ListSongs songs={songs} miniature={album.image} />
     </div>
   );
 };

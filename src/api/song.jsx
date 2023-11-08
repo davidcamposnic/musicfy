@@ -1,6 +1,14 @@
-import { setDoc, doc } from "firebase/firestore";
+import {
+  setDoc,
+  doc,
+  where,
+  collection,
+  query,
+  getDocs,
+} from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
 import { db } from "../utils";
+import { map } from "lodash";
 
 export class Song {
   collectionName = "songs";
@@ -12,6 +20,19 @@ export class Song {
 
       const docRef = doc(db, this.collectionName, id);
       await setDoc(docRef, data);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async obtainAllByAlbum(idAlbum) {
+    try {
+      const whereRef = where("album", "==", idAlbum);
+      const collectionRef = collection(db, this.collectionName);
+      const queryRef = query(collectionRef, whereRef);
+
+      const snapshot = await getDocs(queryRef);
+      return map(snapshot.docs, (doc) => doc.data());
     } catch (error) {
       throw error;
     }

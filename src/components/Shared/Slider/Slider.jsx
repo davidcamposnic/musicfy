@@ -11,16 +11,31 @@ const settings = {
   slidesToShow: 3,
   swipeToSlide: true,
   centerMode: true,
+  adaptiveHeight: true,
 };
 
-const Slider = ({ data, basePath }) => {
+const Slider = ({ data, basePath, song }) => {
   return (
     <Slick {...settings} className="slider">
       {map(data, ({ id, image, name }) => {
+        if (song) {
+          return (
+            <div
+              key={id}
+              className="slider__item"
+              onClick={() => console.log("R")}
+            >
+              <div className="slider__item-block-play">
+                <Image src={image} alt={name} />
+                <Icon name="play circle outline" />
+              </div>
+              <h3>{name}</h3>
+            </div>
+          );
+        }
         return (
           <Link to={`/${basePath}/${id}`} key={id} className="slider__item">
             <Image src={image} alt={name} />
-            <Icon name="play circle outline" />
             <h3>{name}</h3>
           </Link>
         );
