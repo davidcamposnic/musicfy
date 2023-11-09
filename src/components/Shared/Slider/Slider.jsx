@@ -3,6 +3,7 @@ import { Image, Icon } from "semantic-ui-react";
 import Slick from "react-slick";
 import { map } from "lodash";
 import { Link } from "react-router-dom";
+import { usePlayer } from "../../../hooks";
 import "./Slider.scss";
 
 const settings = {
@@ -19,6 +20,8 @@ const Slider = ({ data, basePath, song }) => {
   const [loadCompleted, setLoadCompleted] = useState(false);
   const itemRef = useRef();
 
+  const { playSong } = usePlayer();
+
   useEffect(() => {
     if (itemRef.current) {
       setSize(itemRef.current.clientWidth);
@@ -27,13 +30,14 @@ const Slider = ({ data, basePath, song }) => {
 
   return (
     <Slick {...settings} className="slider">
-      {map(data, ({ id, image, name }) => {
+      {map(data, (item) => {
+        const { id, image, name } = item;
         if (song) {
           return (
             <div
               key={id}
               className="slider__item"
-              onClick={() => console.log("R")}
+              onClick={() => playSong(item, image)}
               ref={itemRef}
               onLoad={() => setLoadCompleted(true)}
             >

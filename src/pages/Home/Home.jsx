@@ -48,7 +48,6 @@ const Home = () => {
           data.push(song);
         }
         setSongs(data);
-        console.log(data);
       } catch (error) {
         console.log(error);
       }
