@@ -15,6 +15,16 @@ const settings = {
 };
 
 const Slider = ({ data, basePath, song }) => {
+  const [size, setSize] = useState(0);
+  const [loadCompleted, setLoadCompleted] = useState(false);
+  const itemRef = useRef();
+
+  useEffect(() => {
+    if (itemRef.current) {
+      setSize(itemRef.current.clientWidth);
+    }
+  }, [loadCompleted]);
+
   return (
     <Slick {...settings} className="slider">
       {map(data, ({ id, image, name }) => {
@@ -24,9 +34,11 @@ const Slider = ({ data, basePath, song }) => {
               key={id}
               className="slider__item"
               onClick={() => console.log("R")}
+              ref={itemRef}
+              onLoad={() => setLoadCompleted(true)}
             >
               <div className="slider__item-block-play">
-                <Image src={image} alt={name} />
+                <Image src={image} alt={name} style={{ height: size }} />
                 <Icon name="play circle outline" />
               </div>
               <h3>{name}</h3>
@@ -34,8 +46,14 @@ const Slider = ({ data, basePath, song }) => {
           );
         }
         return (
-          <Link to={`/${basePath}/${id}`} key={id} className="slider__item">
-            <Image src={image} alt={name} />
+          <Link
+            to={`/${basePath}/${id}`}
+            key={id}
+            className="slider__item"
+            ref={itemRef}
+            onLoad={() => setLoadCompleted(true)}
+          >
+            <Image src={image} alt={name} style={{ height: size }} />
             <h3>{name}</h3>
           </Link>
         );

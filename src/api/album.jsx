@@ -3,6 +3,8 @@ import {
   doc,
   getDoc,
   getDocs,
+  limit,
+  orderBy,
   query,
   setDoc,
   where,
@@ -50,6 +52,20 @@ export class Album {
       const whereRef = where("artist", "==", idArtist);
       const collectionRef = collection(db, this.collectionName);
       const queryRef = query(collectionRef, whereRef);
+
+      const snapshot = await getDocs(queryRef);
+      return map(snapshot.docs, (doc) => doc.data());
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getLastAlbum(itemLimit = 20) {
+    try {
+      const collectionRef = collection(db, this.collectionName);
+      const orderByRef = orderBy("created_at", "desc");
+      const limitRef = limit(itemLimit);
+      const queryRef = query(collectionRef, orderByRef, limitRef);
 
       const snapshot = await getDocs(queryRef);
       return map(snapshot.docs, (doc) => doc.data());
