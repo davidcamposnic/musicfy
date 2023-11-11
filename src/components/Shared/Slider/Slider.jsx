@@ -9,7 +9,7 @@ import "./Slider.scss";
 const settings = {
   dots: false,
   infinite: true,
-  slidesToShow: 3,
+  slidesToShow: 5,
   swipeToSlide: true,
   centerMode: true,
   adaptiveHeight: true,

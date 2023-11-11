@@ -9,13 +9,15 @@ function createWindow() {
     width: 1500,
     height: 1000,
     title: "Musicfy",
-    // titleBarStyle: "hiddenInset",
-    // resizable: false,
+    resizable: false,
+    title: 'Musicfy',
+    titleBarStyle: "hiddenInset",
+    // kiosk: true 
   });
   mainWindow.loadURL(
     isDev
       ? "http://localhost:5173/"
-      : `file://${path.join(__dirname, "../build/index.html")}`
+      : `file://${path.join(__dirname, "../dist/index.html")}`
   );
 
   if (isDev) mainWindow.webContents.openDevTools();
